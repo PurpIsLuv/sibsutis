@@ -1,21 +1,22 @@
 const express = require('express')
-const app = express()
 const cors = require('cors')
+const app = express()
 const conf = require('./config/conf')
-const controller = require('./controllers/auth')
+const controllers = require('./controllers/controllers')
+
+
 
 app.use(cors())
 app.use(express.json())
 
-//app.get("/addUser",controller.addUser)
 
-//app.get("/addStudent",controller.addStudent)
+app.get("/addUser",controllers.add.addUser)
+app.get("/addStudent",controllers.add.addStudent)
+app.get("/addNapravlenie",controllers.add.addNapravlenie)
+app.get("",controllers.add.info)
+app.post("/reg",controllers.auth.registration)
+app.post("/auth",controllers.auth.authorization)
 
-//app.get("/addNapravlenie",controller.addNapravlenie)
-
-//app.get("",controller.info)
-
-app.post("/reg",controller.registration)
 
 app.listen(process.env.PORT || conf.port,()=>{
     console.log('Server Listen ' + conf.port)

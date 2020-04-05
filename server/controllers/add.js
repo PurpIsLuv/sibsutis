@@ -32,7 +32,7 @@ function addStudent(req,res){
 
 function addNapravlenie(req,res){
     models.Napravlenie.create({
-        cod_napravleniya: "03.03.03",
+        cod_napravleniya: "03.03",
         napravlenie_podgotovky: 'CheTo',
         profile_podgotovky: 'prifl'
     })
@@ -45,7 +45,7 @@ function addNapravlenie(req,res){
 }
 
 function info(req,res){
-    models.Napravlenie.findAll({
+    models.User.findAll({
         include: [
             {model:models.Student}
         ],
