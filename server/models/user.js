@@ -1,23 +1,22 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const Student = sequelize.define("Student", {
-    student_id: {
+const User = sequelize.define("User", {
+    id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
-    group_no: {
+    email: {
         type: Sequelize.STRING,
     },
-    fio: {
+    password: {
         type: Sequelize.STRING,
     },
-    cod_napravleniya: {
+    type: {
         type: Sequelize.STRING,
     },
 });
 
-
-module.exports = Student
+module.exports = User

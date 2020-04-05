@@ -1,8 +1,8 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const napravlenie = sequelize.define("napravlenie",{
-    codNapravleniya: {
+const Napravlenie = sequelize.define("Napravlenie",{
+    cod_napravleniya: {
         type: Sequelize.STRING,
     },
     napravlenie_podgotovky: {
@@ -13,4 +13,5 @@ const napravlenie = sequelize.define("napravlenie",{
     },
 })
 
-module.exports = napravlenie
+
+module.exports = Napravlenie
