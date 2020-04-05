@@ -2,76 +2,52 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
+
 const conf = require('./config/conf')
+//MODELS
+const student = require('./models/student')
+const napravlenie = require('./models/napravlenie')
 
-const {student, direction} = require('./models')
-
+student.hasOne(napravlenie,{
+    onDelete: 'cascade'
+})
 
 app.use(cors())
-//app.use(express.json())
-
+app.use(express.json())
 
 app.get("",(req,res)=>{
-    res.send("Server listen")
-})
-
-app.post("/student/:no_group/:fio/:direction_code",(req,res)=>{
-    student.create({
-        no_group: req.params.no_group,
-        fio: req.params.fio,
-        direction_code: req.params.direction_code,
-    })
-    .then(()=>{
-        res.send('Пользователь создан')
-    })
-    .catch(err=>{
-        res.send(err)
-    })
-
-})
-
-app.post("/direction/:direction_Code/:direction_preparation/:profile_preparation",(req,res)=>{
-    direction.create({
-        direction_Code: req.params.direction_Code,
-        direction_preparation: req.params.direction_preparation,
-        profile_preparation: req.params.profile_preparation
-    })
-    .then(()=>{
-        res.send('direcion create')
-    })
-    .catch(err=>{
-        res.send(err)
-    })
-})
-
-app.get('/student',(req,res)=>{
     student.findAll()
     .then(data=>{
-        direction.findOne({
-            where: {
-                direction_Code: data[0].direction_code
-            },
-        })
-        .then(data=>{
-            res.send(data)
+        data.getNapravlenie()
+        .then(dat=>{
+            res.send(data + " : " + dat)
         })
     })
 })
 
+app.post("/student",(req,res)=>{
+    student.create({
+        group_no: req.body.group_no,
+        fio: req.body.fio,
+        cod_napravleniya: req.body.cod_napravleniya,
+    })
+    .then(()=>res.send(req.body))
+    .catch(err=>res.send(err))
+})
+
+app.post("/napravlenie",(req,res)=>{
+    napravlenie.create({
+        codNapravleniya: req.body.codNapravleniya,
+        napravlenie_podgotovky: req.body.napravlenie_podgotovky,
+        profile_podgotovky:req.body.profile_podgotovky,
+    })
+    .then(()=>res.send(req.body))
+    .catch(err=>res.send(err))
+})
+
+
 app.listen(process.env.PORT || conf.port,()=>{
-    console.log('Server Listen')
+    console.log('Server Listen ' + conf.port)
     console.log('_______________________')
 })
 
-
-/* 
-
-direction.belongsTo(models.student,{
-    foreignKey: 'direction_code',
-    target_key: 'direction_Code',
-})
-student.hasMany(models.direction,{
-    foreignKey: 'direction_Code'
-})
-
-*/
