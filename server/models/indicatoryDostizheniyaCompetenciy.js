@@ -1,7 +1,7 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const Индикаторы_достижения_компетенций = sequelize.define('Индикаторы_достижения_компетенций',{
+const Индикаторы_достижения_компетенций = sequelize.define('индикаторы_достижения_компетенций',{
     код_индикатора: {
         type: Sequelize.STRING,
     }, 

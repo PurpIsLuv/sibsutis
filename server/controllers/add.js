@@ -3,9 +3,9 @@ const models = require('../associate/associate')
 
 function addNapravlenie(req,res){
     models.Направление.create({
-        код_направления: '02.05.01',
-        направление_подготовки: 'Цифровое телерадиовещание',
-        профиль_подготовки: 'Системы радиосвязи, мобильной связи и радиодоступа'
+        код_направления: '13.25.01',
+        направление_подготовки: '---',
+        профиль_подготовки: '---'
     })
     .then(()=>{
         res.send("addNapravlenie")
@@ -108,10 +108,61 @@ function addIndicator(req,res){
 }
 */
 
+function addZadaniya(req,res){
+    models.Индикаторы_достижения_компетенций.findOne({
+        where: {
+            код_индикатора: req.body.код_индикатора
+        },
+    })
+    .then(indicator=>{
+        models.Контрольные_задания.create({
+            текст_задания: req.body.текст_задания,
+            тип_задания: req.body.тип_задания,
+            код_индикатора: indicator.dataValues.код_индикатора,
+            индикаторыДостиженияКомпетенцийId: indicator.dataValues.id
+        })
+        .then(()=>{
+            res.send('addZadaniya')
+        })
+        .catch(err=>res.send(err))   
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+    /*
+    models.Индикаторы_достижения_компетенций.findOne({
+        where: {
+            код_индикатора: req.body.код_индикатора
+        },
+    })
+    then(indicator=>{
+        models.Контрольные_задания.create({
+            текст_задания: req.body.текст_задания,
+            тип_задания: req.body.тип_задания,
+            код_индикатора: indicator.dataValues.код_индикатора,
+            индикаторы_достижения_компетенцийId: indicator.dataValues.id
+        })
+        .then(()=>{
+            res.send('addZadaniya')
+        })
+        .catch(err=>res.send(err))       
+    })
+    .catch(err=>res.send(err))
+    */
+}
+
+/*
+{
+    "текст_задания": "Все сигналы могут быть подразделены на периодические, значения которых повторяются через определённые промежутки времени, и непериодические.",
+    "тип_задания": "Открытая форма",
+    "код_индикатора": "ОПК-3.2"
+}
+*/
+
 function info(req,res){
-    models.Компетенция.findAll({
+    models.Индикаторы_достижения_компетенций.findAll({
         include: [
-            {model:models.Индикаторы_достижения_компетенций}
+            {model:models.Контрольные_задания}
         ],
         order: [ [ 'id', 'ASC' ] ],
     })
@@ -129,4 +180,5 @@ module.exports = {
     addDisciplina,
     addCompetencia,
     addIndicator,
+    addZadaniya,
 }

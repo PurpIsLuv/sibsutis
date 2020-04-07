@@ -17,7 +17,7 @@ app.get("/addNapravlenie",controllers.add.addNapravlenie)
 app.post("/addDisciplina",controllers.add.addDisciplina)
 app.post("/addCompetencia",controllers.add.addCompetencia)
 app.post("/addIndicator",controllers.add.addIndicator)
-
+app.post("/addZadaniya",controllers.add.addZadaniya)
 
 app.listen(process.env.PORT || config.port,()=>{
     console.log('Server Listen ' + config.port)
