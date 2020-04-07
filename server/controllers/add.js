@@ -3,39 +3,12 @@ const models = require('../associate/associate')
 
 function addNapravlenie(req,res){
     models.Направление.create({
-        код_направления: '11.03.02',
-        направление_подготовки: 'Инфокоммуникационные технологии и системы связи',
-        профиль_подготовки: 'Транспортные сети и системы связи'
+        код_направления: '02.05.01',
+        направление_подготовки: 'Цифровое телерадиовещание',
+        профиль_подготовки: 'Системы радиосвязи, мобильной связи и радиодоступа'
     })
-    .then(napr=>{
-        res.send("OK")
-
-        /*
-        models.Учебные_дисциплины.create({
-            наименование_дисциплины: 'axa',
-            форма_контроля: 'from',
-            код_направления: '10.03',
-            направлениеId: 1
-        })
-        .then(ych=>{
-            models.Компетенция.create({
-                код_компетенции: 'cod',
-                формулировка_компетенции: 'formula',
-                код_направления: '10.03',
-                тип_компетенции: 'type',
-                направлениеId: 1
-            })
-            .then(()=>{
-                res.send('OK')
-            })
-            .catch(err=>{
-                res.send(err)
-            })
-        })
-        .catch(err=>{
-            res.send(err)
-        })
-        */
+    .then(()=>{
+        res.send("addNapravlenie")
     })
     .catch(err=>{
         res.send(err)
@@ -57,7 +30,7 @@ function addDisciplina(req,res){
             направлениеId: napr.dataValues.id
         })
         .then(()=>{
-            res.send('OK')
+            res.send('addDisciplina')
         })
         .catch(err=>res.send(err))
     })
@@ -66,7 +39,7 @@ function addDisciplina(req,res){
 /*
 
 {
-    "код_направления": "03.03.03",
+    "код_направления": "02.05.01",
     "id_дисциплины": "Б1.О.24",
     "наименование_дисциплины": "Основы телекоммуникаций",
     "форма_контроля": "экзамен"
@@ -89,7 +62,7 @@ function addCompetencia(req,res){
             направлениеId: napr.dataValues.id
         })
         .then(()=>{
-            res.send('OK')
+            res.send('addCompetencia')
         })
         .catch(err=>res.send(err))
     })
@@ -98,17 +71,47 @@ function addCompetencia(req,res){
 
 /*
 {
-    "код_направления": "11.03.02"
+    "код_направления": "10.13.00",
     "код_компетенции": "ОПК-3",
     "формулировка_компетенции": "Способен применять методы поиска, хранения, обработки, анализа и представления в требуемом формате информации из различных источников и баз данных, соблюдая при этом основные требования информационной безопасности",
     "тип_компетенции": "Общепрофессиональные",
 } 
 */
 
+function addIndicator(req,res){
+    models.Компетенция.findOne({
+        where: {
+            код_компетенции: req.body.код_компетенции
+        },
+    })
+    .then(competenciya=>{
+        console.log(competenciya.dataValues)
+        res.send('OK')
+        models.Индикаторы_достижения_компетенций.create({
+            код_индикатора: req.body.код_индикатора,
+            формулировка_индикатора: req.body.формулировка_индикатора,
+            код_компетенции: competenciya.dataValues.код_компетенции,
+            компетенцияId: competenciya.dataValues.id
+        })
+        .then(()=>{
+            res.send('addIndicator')
+        })
+        .catch(err=>res.send(err))
+    })
+}
+
+/*
+{
+    "код_индикатора": "ОПК-3.2",
+    "формулировка_индикатора": "Уметь использовать базовые средства обеспечения информационной безопасности, формировать перечень мер и средств по защите информации",
+    "код_компетенции": "ОПК-3"
+}
+*/
+
 function info(req,res){
-    models.Направление.findAll({
+    models.Компетенция.findAll({
         include: [
-            {model:models.Компетенция}
+            {model:models.Индикаторы_достижения_компетенций}
         ],
         order: [ [ 'id', 'ASC' ] ],
     })
@@ -125,4 +128,5 @@ module.exports = {
     info,
     addDisciplina,
     addCompetencia,
+    addIndicator,
 }

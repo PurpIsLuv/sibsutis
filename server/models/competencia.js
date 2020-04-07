@@ -4,8 +4,6 @@ const Sequelize = require('sequelize')
 const Компетенция = sequelize.define('компетенция',{
     код_компетенции: {
         type: Sequelize.STRING,
-        primaryKey: true,
-        allowNull: false
     },
     формулировка_компетенции: {
         type: Sequelize.STRING,
