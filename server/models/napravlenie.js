@@ -1,17 +1,17 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const Napravlenie = sequelize.define("Napravlenie",{
-    cod_napravleniya: {
+const Направление = sequelize.define("направление",{
+    код_направления: {
         type: Sequelize.STRING,
     },
-    napravlenie_podgotovky: {
+    направление_подготовки: {
         type: Sequelize.STRING,
     },
-    profile_podgotovky: {
+    профиль_подготовки: {
         type: Sequelize.STRING,
     },
 })
 
 
-module.exports = Napravlenie
+module.exports = Направление

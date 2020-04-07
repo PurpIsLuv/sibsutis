@@ -2,32 +2,41 @@ const models = require('../associate/associate')
 
 
 function registration(req,res){
-    models.User.findOne({
+    models.Пользователь.findOne({
         where: {
-            email: req.body.email
+            почта: req.body.почта
         },
     })
     .then(person=>{
         if (person){
             res.send('Sysh')
         }else{
-            models.User.create({
-                email: req.body.email,
-                password: req.body.password,
-                type: req.body.type
+            models.Пользователь.create({
+                почта: req.body.почта,
+                пароль: req.body.пароль,
+                тип: req.body.тип
             })
             .then(user=>{
-                models.Student.create({
-                    group_no: req.body.group_no,
-                    fio: req.body.fio,
-                    cod_napravleniya: req.body.cod_napravleniya,
-                    UserId: user.dataValues.id,
-                    NapravlenieId: 1
+                models.Направление.findOne({
+                    where: {
+                        код_направления: req.body.код_направления
+                    },
                 })
-                .then(()=>{
-                    res.send('Create')
+                .then(napravlenie=>{
+                    models.Студент.create({
+                        номер_группы: req.body.номер_группы,
+                        фио: req.body.фио,
+                        код_направления: req.body.код_направления,
+                        пользовательId: user.dataValues.id,
+                        направлениеId: napravlenie.dataValues.id
+                    })
+                    .then(()=>{
+                        res.send('Create')
+                        console.log(user.dataValues)
+                        console.log(napravlenie.dataValues)
+                    })
+                    .catch(err=>res.send(err))
                 })
-                .catch(err=>res.send(err))
             })
             .catch(err=>res.send(err))
         }
@@ -35,14 +44,14 @@ function registration(req,res){
 }
 
 function authorization(req,res){
-    models.User.findOne({
+    models.Пользователь.findOne({
         where: {
-            email: req.body.email
+            почта: req.body.почта
         },
     })
     .then(user=>{
         if (user){
-            if (user.password == req.body.password){
+            if (user.пароль == req.body.пароль){
                 res.send('Password success')
             }else{
                 res.send('Password error')
@@ -56,17 +65,17 @@ function authorization(req,res){
 /* 
 REG
 {
-	"email": "qwer@gmai.com",
-	"password": "hash",
-	"type": "student",
-	"group_no": "II862",
-	"fio": "Andrey",
-	"cod_napravleniya": "03.03"
+	"почта": "purp@gmail.com",
+	"пароль": "purp",
+	"тип": "student",
+	"номер_группы": "II862",
+	"фио": "Roman",
+	"код_направления": "10.01.01"
 }
 AUTH
 {
-	"email": "qwer@gmai.com",
-	"password": "hash",
+	"почта": "qwer@gmai.com",
+	"пароль": "hash",
 }
 */
 

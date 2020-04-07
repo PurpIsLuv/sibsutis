@@ -1,20 +1,21 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const UchebnieDiscipliny = sequelize.define("UchebnieDiscipliny",{
-    id_discipliny: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+const Учебные_дисциплины = sequelize.define("учебные_дисциплины",{
+    id_дисциплины: {
+        type: Sequelize.STRING,
         primaryKey: true,
         allowNull: false
     },
-    naimenovanie_discipliny: {
+    наименование_дисциплины: {
         type: Sequelize.STRING,
     },
-    forma_controlya: {
+    форма_контроля: {
         type: Sequelize.STRING,
     },
-    cod_napravleniya: {
+    код_направления: {
         type: Sequelize.STRING,
     },
 })
+
+module.exports = Учебные_дисциплины
