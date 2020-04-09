@@ -11,7 +11,7 @@ const sequelize = new Sequelize("sibsutis", "mysql", "mysql", {
 
 
 
-sequelize.sync({force: true}).then(result=>{
+sequelize.sync().then(result=>{
   console.log(result);
 })
 .catch(err=>console.log(err))
