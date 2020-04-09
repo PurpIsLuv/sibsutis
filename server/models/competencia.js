@@ -2,16 +2,16 @@ const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
 const Компетенция = sequelize.define('компетенция',{
-    код_компетенции: {
+    "код_компетенции": {
         type: Sequelize.STRING,
     },
-    формулировка_компетенции: {
+    "формулировка_компетенции": {
         type: Sequelize.STRING,
     },
-    код_направления: {
+    "код_направления": {
         type: Sequelize.STRING,
     },
-    тип_компетенции: {
+    "тип_компетенции": {
         type: Sequelize.STRING,
     }
 })

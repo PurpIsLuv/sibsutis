@@ -1,20 +1,19 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const Студент = sequelize.define("студент", {
+const Оценки_зун = sequelize.define('оценки_зун',{
     "id_студента": {
-      type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
     },
-    "номер_группы": {
+    "зун": {
         type: Sequelize.STRING,
     },
-    "ФИО": {
+    "оценка_F": {
         type: Sequelize.STRING,
     },
-    "код_направления": {
+    "оценка_D": {
         type: Sequelize.STRING,
     },
-});
+})
 
-
-module.exports = Студент
+module.exports = Оценки_зун

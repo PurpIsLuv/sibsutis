@@ -1,16 +1,16 @@
 const sequelize = require('../config/db')
 const Sequelize = require('sequelize')
 
-const Пользователь = sequelize.define("пользователь", {
-    "почта": {
+const Оценки_зув = sequelize.define('оценки_зув',{
+    "id_оценки": {
         type: Sequelize.STRING,
     },
-    "пароль": {
+    "код_зув": {
         type: Sequelize.STRING,
     },
-    "тип": {
+    "значение_оценки": {
         type: Sequelize.STRING,
     },
-});
+})
 
-module.exports = Пользователь
+module.exports = Оценки_зув

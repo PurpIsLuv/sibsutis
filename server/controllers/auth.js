@@ -12,9 +12,9 @@ function registration(req,res){
             res.send('Sysh')
         }else{
             models.Пользователь.create({
-                почта: req.body.почта,
-                пароль: req.body.пароль,
-                тип: req.body.тип
+                "почта": req.body["почта"],
+                "пароль": req.body["пароль"],
+                "тип": req.body["тип"]
             })
             .then(user=>{
                 models.Направление.findOne({
