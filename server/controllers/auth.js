@@ -9,7 +9,9 @@ async function reg(req,res){
         }
     })
     if (person){
-        res.status(203).send("User exist")
+        res.status(203).send({
+            err: "User exist"
+        })
     }else{
         let user = await models["Пользователь"].create({
             "почта": req.body["почта"],
@@ -37,6 +39,7 @@ async function reg(req,res){
         })
     }
 }
+
 async function login(req,res){
     let user = await models.Пользователь.findOne({
         where: {
@@ -46,15 +49,19 @@ async function login(req,res){
     if (user){
         if (bcryptjs.compareSync(req.body["пароль"],user["пароль"])){
             let token = jwt.createToken(user)
-            res.status(202).send({
+            res.status(200).send({
                 msg: "Password success",
-                token
+                token,
             })
         }else{
-            res.status(203).send("Password error")
+            res.status(203).send({
+                err: "Password error",
+            })
         }
     }else{
-        res.status(204).send("User not found")
+        res.status(202).send({
+            err: "User not found",
+        })
     }
 }
 

@@ -12,6 +12,7 @@
             </select>
             <select name="" id="" v-model="код_направления">
                 <option value="код_направления">код_направления</option>
+                <option value="11.03.02">11.03.02</option>
             </select>
             <input type="text" placeholder="Пароль" v-model="password">
             <input type="submit" value="Зарегистрироваться">

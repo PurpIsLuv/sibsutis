@@ -6,8 +6,6 @@
       <input type="text" placeholder="Пароль" v-model="password">
       <input type="submit" value="Войти">
     </form>
-
-    <button @click="get">get</button>
   </div>
 </template>
 
@@ -38,14 +36,6 @@ export default {
         password: this.password
       })
     },
-    get(){
-      fetch('http://192.168.100.12:8081/',{
-        method: 'GET'
-      })
-      .then(data=>{
-        console.log(data)
-      })
-    }
   },
 }
 </script>
