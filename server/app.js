@@ -12,6 +12,9 @@ app.use(express.json())
 
 app.post("/registration",controllers.auth.reg)
 app.post("/login",controllers.auth.login)
+app.get("",(req,res)=>{
+    res.send('TEST')
+})
 
 
 app.get("/addNapravlenie",controllers.add.addNapravlenie)

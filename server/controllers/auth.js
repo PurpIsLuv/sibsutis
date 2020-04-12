@@ -1,6 +1,6 @@
 const models = require('../associate/associate')
 const jwt = require('../services/jwt')
-
+const bcryptjs = require('bcryptjs')
 
 async function reg(req,res){
     let person = await models["Пользователь"].findOne({
@@ -44,7 +44,7 @@ async function login(req,res){
         }
     })
     if (user){
-        if (user["пароль"] == req.body["пароль"]){
+        if (bcryptjs.compareSync(req.body["пароль"],user["пароль"])){
             let token = jwt.createToken(user)
             res.status(202).send({
                 msg: "Password success",
