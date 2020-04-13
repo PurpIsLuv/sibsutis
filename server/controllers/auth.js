@@ -19,23 +19,25 @@ async function reg(req,res){
             "тип": req.body["тип"]
         })
         let token = jwt.createToken(user)
-        let napravlenie = await models["Направление"].findOne({
-            where: {
-                "профиль_подготовки": req.body["профиль_подготовки"]
-            }
-        })
-        let students = await models["Студент"].findAll()
-        await models["Студент"].create({
-            "id_студента": students.length + 1,
-            "номер_группы": req.body["номер_группы"],
-            "ФИО": req.body["ФИО"],
-            "код_направления": napravlenie.dataValues["код_направления"],
-            "пользовательId": user.dataValues.id,
-            "направлениеId": napravlenie.dataValues.id
-        })
+        if (req.body["тип"] == 'Студент'){
+            let napravlenie = await models["Направление"].findOne({
+                where: {
+                    "профиль_подготовки": req.body["профиль_подготовки"]
+                }
+            })
+            let students = await models["Студент"].findAll()
+            await models["Студент"].create({
+                "id_студента": students.length + 1,
+                "номер_группы": req.body["номер_группы"],
+                "ФИО": req.body["ФИО"],
+                "код_направления": napravlenie.dataValues["код_направления"],
+                "пользовательId": user.dataValues.id,
+                "направлениеId": napravlenie.dataValues.id
+            })  
+        }
         res.status(201).send({
             msg: "User created",
-            token
+            token,
         })
     }
 }
