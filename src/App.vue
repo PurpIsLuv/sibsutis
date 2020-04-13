@@ -3,12 +3,21 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/registration">Registration</router-link> |
+      <router-link to="/student">Student page</router-link> |
+      <router-link to="/teacher">Teacher page</router-link> |
     </div>
     <router-view/>
   </div>
 </template>
 
+<script>
+export default {
+  
+}
+</script>
+
 <style lang="scss">
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

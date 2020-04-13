@@ -25,7 +25,7 @@ module.exports = {
 
 
         async checkRegistration(ctx,{
-            fio,email,type,код_направления,password,номер_группы}){
+            fio,email,type,профиль_подготовки,password,номер_группы}){
             let saltRounds =  10
             let salt = bcryptjs.genSaltSync(saltRounds)
             let hash = bcryptjs.hashSync(password,salt)
@@ -35,7 +35,7 @@ module.exports = {
                 "тип": type,
                 "номер_группы": номер_группы,
                 "ФИО": fio,
-                "код_направления": код_направления
+                "профиль_подготовки": профиль_подготовки,
             })
             let response = await fetch('http://localhost:8081/registration',{
                 method: 'POST',

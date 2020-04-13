@@ -21,7 +21,7 @@ async function reg(req,res){
         let token = jwt.createToken(user)
         let napravlenie = await models["Направление"].findOne({
             where: {
-                "код_направления": req.body["код_направления"]
+                "профиль_подготовки": req.body["профиль_подготовки"]
             }
         })
         let students = await models["Студент"].findAll()
@@ -29,7 +29,7 @@ async function reg(req,res){
             "id_студента": students.length + 1,
             "номер_группы": req.body["номер_группы"],
             "ФИО": req.body["ФИО"],
-            "код_направления": req.body["код_направления"],
+            "код_направления": napravlenie.dataValues["код_направления"],
             "пользовательId": user.dataValues.id,
             "направлениеId": napravlenie.dataValues.id
         })

@@ -14,6 +14,8 @@ app.post("/registration",controllers.auth.reg)
 app.post("/login",controllers.auth.login)
 
 
+app.get("/regData",controllers.getData.regData)
+
 app.get("/addNapravlenie",controllers.add.addNapravlenie)
 
 

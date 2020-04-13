@@ -5,65 +5,91 @@
             <input type="text" placeholder="Фамилия" v-model="surname">
             <input type="text" placeholder="Отчество" v-model="patronymic">
             <input type="text" placeholder="Почта" v-model="email">
-            <input type="text" placeholder="Номер группы" v-model="номер_группы">
+            
+
             <select name="" id="" v-model="type">
                 <option value="Студент">Студент</option>
                 <option value="Преподаватель">Преподаватель</option>
             </select>
-            <select name="" id="" v-model="код_направления">
-                <option value="код_направления">код_направления</option>
-                <option value="11.03.02">11.03.02</option>
-            </select>
+
+            <section class="studentSection" v-if="isStudent">
+
+                <input type="text" placeholder="Номер группы" v-model="номер_группы">
+
+                <select name="" id="" v-model="код_направления">
+                    <option :value="i" v-for="i in regData.код_направления" :key="i">
+                        {{i}}
+                    </option>
+                </select>
+
+                <select name="" id="" v-model="направление_подготовки">
+                    <option :value="i" v-for="i in regData.направление_подготовки" :key="i">
+                        {{i}}
+                    </option>
+                </select>
+
+                <select name="" id="" v-model="профиль_подготовки">
+                    <option :value="i" v-for="i in regData.профиль_подготовки" :key="i">
+                        {{i}}
+                    </option>
+                </select>
+            </section>
+
+
             <input type="text" placeholder="Пароль" v-model="password">
             <input type="submit" value="Зарегистрироваться">
         </form>
+
     </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions,mapGetters} from 'vuex'
 
 export default {
     data(){
         return {
-            name: new String(),
-            surname: new String(),
-            patronymic: new String(),
-            email: new String(),
-            type: new String(),
-            "код_направления": new String(),
-            "направление_подготовки": new String(),
-            "профиль_подготовки": new String(),
-            password: new String(),
-            "номер_группы": new String()
+            name: '',
+            surname : '',
+            patronymic : '',
+            email : '',
+            type : '',
+            "код_направления" : '',
+            "направление_подготовки" : '',
+            "профиль_подготовки" : '',
+            password : '',
+            "номер_группы" : '',
+            regData: {},
         }
     },
     created(){
-        this.name = ''
-        this.surname = ''
-        this.patronymic = ''
-        this.email = ''
-        this.type = ''
-        this["код_направления"] = ''
-        this["направление_подготовки"] = ''
-        this["профиль_подготовки"] = ''
-        this.password = ''
-        this["номер_группы"] = ''
+        this.getDBRegData()
     },
     methods: {
-        ...mapActions(['checkRegistration']),
+        ...mapGetters(['getRegData']),
+        ...mapActions(['checkRegistration','getDBRegData']),
         sendData(){
             let fio = `${this.name} ${this.surname} ${this.patronymic}`
             this.checkRegistration({
                 fio,
                 email: this.email,
                 type: this.type,
-                "код_направления": this["код_направления"],
+                "профиль_подготовки": this["профиль_подготовки"],
                 password: this.password,
-                "номер_группы": this["номер_группы"]
+                "номер_группы": this["номер_группы"],
             })
-        }
+        },
     },
+    computed:{
+        isStudent: function (){
+            if (this.type == 'Студент'){
+                this.regData = this.getRegData()
+                return true
+            }else{
+                return false
+            }
+        }
+    }
 }
 </script>
 
