@@ -10,7 +10,7 @@ async function reg(req,res){
     })
     if (person){
         res.status(203).send({
-            err: "User exist"
+            err: "Пользователь существует"
         })
     }else{
         let user = await models["Пользователь"].create({
@@ -49,20 +49,43 @@ async function login(req,res){
         }
     })
     if (user){
+        let token = jwt.createToken(user)
         if (bcryptjs.compareSync(req.body["пароль"],user["пароль"])){
-            let token = jwt.createToken(user)
-            res.status(200).send({
-                msg: "Password success",
-                token,
-            })
+            if (user.dataValues["тип"] == 'Студент'){
+                let student = await models["Студент"].findOne({
+                    where: {
+                        "пользовательId": user.dataValues.id
+                    },
+                })
+                let napravlenie = await models["Направление"].findOne({
+                    where: {
+                        id: student.dataValues["направлениеId"]
+                    }
+                })
+                res.status(200).send({
+                    msg: "Password success",
+                    token,
+                    "тип": user.dataValues["тип"],
+                    "ФИО": student.dataValues["ФИО"],
+                    "код_направления": napravlenie.dataValues["код_направления"],
+                    "направление_подготовки": napravlenie.dataValues["направление_подготовки"],
+                    "профиль_подготовки": napravlenie.dataValues["профиль_подготовки"]
+                })
+            }else if(user.dataValues["тип"] == 'Преподаватель'){
+                res.status(200).send({
+                    msg: "Password success",
+                    token,
+                    "тип": user.dataValues["тип"]
+                })
+            }
         }else{
             res.status(203).send({
-                err: "Password error",
+                err: "Неправильный пароль",
             })
         }
     }else{
-        res.status(202).send({
-            err: "User not found",
+        res.status(203).send({
+            err: "Пользователь не найден",
         })
     }
 }

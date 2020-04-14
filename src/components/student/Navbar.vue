@@ -1,14 +1,14 @@
 <template>
     <section class="navbar container-fluid">
-        <div class="navbar__fio col-4 offset-1">Иванов Иван Иванович</div>
+        <div class="navbar__fio col-4 offset-1">{{name}}</div>
         <div class="navbar__info col-5 offset-1">
             <div class="row">
-                <span>11.03.11</span>
-                <span>Инфокоммуникационные технологии и системы связи</span>
+                <span>{{код_направления}}</span>
+                <span>{{направление_подготовки}}</span>
             </div>
             <div class="row">
                 <span>Профиль:</span>
-                <span>Инфокоммуникационные сети и системы</span>
+                <span>{{профиль_подготовки}}</span>
             </div>
         </div>
         <div class="col-1"></div>
@@ -19,6 +19,28 @@
 export default {
     computed: {
         
+    },
+    data(){
+        return {
+            name: '',
+            "код_направления": '',
+            "направление_подготовки": '',
+            "профиль_подготовки": '',
+        }
+    },
+    mounted(){ 
+        if (sessionStorage["ФИО"]){
+            this.name = sessionStorage["ФИО"]
+        }
+        if (sessionStorage["код_направления"]){
+            this["код_направления"] = sessionStorage["код_направления"]     
+        }
+        if (sessionStorage["направление_подготовки"]){
+            this["направление_подготовки"] = sessionStorage["направление_подготовки"]
+        }
+        if (sessionStorage["профиль_подготовки"]){
+            this["профиль_подготовки"] = sessionStorage["профиль_подготовки"]
+        }
     },
 }
 </script>

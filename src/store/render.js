@@ -1,6 +1,7 @@
 const config = require('../config')
 
-module.exports = {
+
+export default {
     state: {
         regData: new Object()
     },
