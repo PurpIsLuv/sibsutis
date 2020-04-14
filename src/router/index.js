@@ -5,7 +5,7 @@ import Home from '../views/Home.vue'
 import RegistrationPage from '../views/RegistrationPage.vue'
 import StudentPage from '../views/StudentPage.vue'
 import TeacherPage from '../views/TeacherPage'
-
+import AdminPage from '../views/AdminPage'
 
 Vue.use(VueRouter)
 
@@ -29,6 +29,11 @@ Vue.use(VueRouter)
     path: '/teacher',
     name: 'TeacherPage',
     component: TeacherPage
+  },
+  {
+    path: '/admin',
+    name: 'AdminPage',
+    component: AdminPage
   },
 ]
 

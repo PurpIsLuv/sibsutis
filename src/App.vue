@@ -5,6 +5,7 @@
       <router-link to="/registration">Registration</router-link> |
       <router-link to="/student">Student page</router-link> |
       <router-link to="/teacher">Teacher page</router-link> |
+      <router-link to="/admin">Admin page</router-link> |
     </div>
     <router-view/>
   </div>
