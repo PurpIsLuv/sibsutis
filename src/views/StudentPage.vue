@@ -19,11 +19,12 @@ export default {
         Tasks,
         Scores,
     },
-    data(){return{}},
     methods: {
-        ...mapActions([])
+        ...mapActions(['getStudentData'])
     },
-    created(){},
+    created(){
+        this.getStudentData()
+    },
 }
 </script>
 

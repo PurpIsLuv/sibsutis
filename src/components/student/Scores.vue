@@ -10,17 +10,15 @@
                     <li class="col-2">Оценка F</li>
                 </ul>
                 <ul>       
-                    <li class="d-flex">
-                        <div class="col-2">З.1</div>
-                        <div class="col-6">Основные закономерности передачи информации в инфокоммуникационных системах, основные виды сигналов, используемых в телекоммуникационных системах</div>
+                    <li class="d-flex" v-for="(resultTrainingZYV,i) in scoresData.resultTrainingZYV" :key="i">
+                        <div class="col-2">
+                            {{resultTrainingZYV["код_зув"]}}
+                        </div>
+                        <div class="col-6">
+                            {{resultTrainingZYV["формулировка_зув"]}}
+                        </div>
                         <div class="col-2">5,00</div>
                         <div class="col-2">Высокий</div>
-                    </li>
-                    <li class="d-flex">
-                        <div class="col-2">У.1</div>
-                        <div class="col-6">Использовать базовые средства обеспечения информационной безопасности, формировать перечень мер и средств по защите информации</div>
-                        <div class="col-2">4,24</div>
-                        <div class="col-2">Средний</div>
                     </li>
                 </ul>     
             </div>  
@@ -32,15 +30,14 @@
                     <li class="col-2">Оценка</li>
                 </ul>
                 <ul>       
-                    <li class="d-flex">
-                        <div class="col-2">ОПК-3.1</div>
-                        <div class="col-8">Знать виды и параметры сигналов, способность преобразования чисел в различные системы счисления, применение знаний физики и математики при решении практических задач</div>
+                    <li class="d-flex" v-for="(indicatorAchievement,i) in scoresData.indicatorAchievement" :key="i">
+                        <div class="col-2">
+                            {{indicatorAchievement["код_индикатора"]}}
+                        </div>
+                        <div class="col-8">
+                            {{indicatorAchievement["формулировка_индикатора"]}}
+                        </div>
                         <div class="col-2">10</div>
-                    </li>
-                    <li class="d-flex">
-                        <div class="col-2">ОПК-3.2</div>
-                        <div class="col-8">Уметь использовать базовые средства обеспечения информационной безопасности, формировать перечень мер и средств по защите информации</div>
-                        <div class="col-2">8</div>
                     </li>
                 </ul>     
             </div>  
@@ -56,8 +53,12 @@
                 </ul>
                 <ul>       
                     <li class="d-flex">
-                        <div class="col-2">ОПК-3</div>
-                        <div class="col-8">Способен применять методы поиска, хранения, обработки, анализа и представления в требуемом формате информации из различных источников и баз данных, соблюдая при этом основные требования информационной безопасности</div>
+                        <div class="col-2">
+                            {{scoresData.competence["код_компетенции"]}}
+                        </div>
+                        <div class="col-8">
+                            {{scoresData.competence["формулировка_компетенции"]}}
+                        </div>
                         <div class="col-2">8</div>
                     </li>
                 </ul>     
@@ -80,13 +81,21 @@
                 </ul>     
             </div> 
         </div>
-
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-    
+    methods: {
+        ...mapGetters(['gettersScoresData'])
+    },
+    computed: {
+        scoresData: function(){
+            console.log(this.gettersScoresData())
+            return this.gettersScoresData()
+        },
+    },
 }
 </script>
 

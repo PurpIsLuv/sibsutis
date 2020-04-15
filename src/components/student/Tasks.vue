@@ -6,22 +6,15 @@
                 <li class="col-2">Тип</li>
                 <li class="col-2">Оценка</li>
             </ul>
-        
             <ul>
-                <li class="d-flex task">
-                    <div class="task col-8">Виды и параметры сигналов. Амплитудный спектр периодических сигналов. Уровни сигналов (децибелы). Затухание сигнала</div>
-                    <div class="type col-2">Открытая форма</div>
+                <li class="d-flex task" v-for="(task,i) in tasks" :key="i">
+                    <div class="task col-8">
+                        {{task["текст_задания"]}}
+                    </div>
+                    <div class="type col-2">
+                        {{task["тип_задания"]}}
+                    </div>
                     <div class="assessment col-2">8</div>
-                </li>
-                <li class="d-flex task">
-                    <div class="task col-8">Переведите двоичное число 01001101 в десятичное.</div>
-                    <div class="type col-2">Тестовое задание</div>
-                    <div class="assessment col-2">1</div>
-                </li>
-                <li class="d-flex task">
-                    <div class="task col-8">Вычислите амплитуду результирующего колебания, являющегося результатом сложения двух синусоидальных сигналов с единичной амплитудой и сдвигом фаз равным 30 градусов.</div>
-                    <div class="type col-2">Открытая форма</div>
-                    <div class="assessment col-2">10</div>
                 </li>
             </ul>          
         </div>
@@ -29,8 +22,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-    
+    methods: {
+        ...mapGetters(['gettersTasksData'])
+    }, 
+    computed: {
+        tasks: function(){
+            return this.gettersTasksData()
+        }
+    },
 }
 </script>
 
