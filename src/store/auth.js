@@ -23,6 +23,7 @@ export default {
             })
             let data = await response.json()
             if (response.status == 200){
+                sessionStorage.setItem("token",data.token)
                 //student
                 if (data["тип"] == 'Студент'){
                     router.push("/student")
@@ -62,6 +63,7 @@ export default {
 
             let data = await response.json()
             if (response.status == 201){
+                sessionStorage.setItem("token",data.token)
                 if (type == 'Студент'){
                     router.push("/student")
                     sessionStorage.setItem("ФИО",fio)

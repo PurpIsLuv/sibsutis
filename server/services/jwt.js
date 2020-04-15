@@ -15,22 +15,27 @@ function createToken(user){
     return token
 }
 
-function verifyToken(req,res,next){
+function verifyToken(req,res){
+    let Bearer = 'Bearer'
     let token
-    if (req.headers['autorization']){
-        token = req.headers['autorization']
+    if (req.headers['authorization']){
+        let str = req.headers['authorization']
+        token = str.slice(Bearer.length + 1)
     }
     if (token){
-        token = token.replace(/bearer|jwt\s+/i, '')
-        jwt.verify(token,config.secretKey,(err, decodedToken)=>{
-            if (err){
-                res.send(err)
+        jwt.verify(token,config.secretKey,(err,decodedToken)=>{
+            if (decodedToken){
+                req.decodedTokenId = decodedToken.id
+            }else{
+                res.send({
+                    err
+                })
             }
-            req.userId = decodedToken
-            next()
         })
     }else{
-        res.send('err')
+        res.send({
+            msg: 'Токена нет'
+        })
     }
 }
 

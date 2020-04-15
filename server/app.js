@@ -14,9 +14,18 @@ app.post("/registration",controllers.auth.reg)
 app.post("/login",controllers.auth.login)
 app.get("/regData",controllers.getData.regData)
 
+app.get("/studentPageData",controllers.getData.studentPageData)
 
 //for admin
+
+
+app.post("/addCompetence",controllers.add.addCompetence)
 app.post("/addDirection",controllers.add.addDirection)
+app.post("/addAchievementIndicator",controllers.add.addAchievementIndicator)
+app.post("/addResultTrainingZYV",controllers.add.addResultTrainingZYV)
+app.post("/indistinctClassificationZYV",controllers.add.addIndistinctClassificationZYV)
+app.post("/addIndicatorZYV",controllers.add.addIndicatorZYV)
+
 app.post("/addTask",controllers.add.addTask)
 
 

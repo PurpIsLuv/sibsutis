@@ -6,7 +6,7 @@ const Нечеткая_классфикация_зув = sequelize.define('не�
         type: Sequelize.FLOAT,
     },
     "код_зув": {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
     },
     "код_задания": {
         type: Sequelize.INTEGER,
