@@ -27,7 +27,7 @@ function verifyToken(req,res){
             if (decodedToken){
                 req.decodedTokenId = decodedToken.id
             }else{
-                res.send({
+                res.status(203).send({
                     err
                 })
             }

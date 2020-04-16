@@ -1,4 +1,5 @@
 const config = require('../config')
+import router from '../router'
 
 export default {
     state: {
@@ -17,7 +18,12 @@ export default {
                 },
             })
             let data = await response.json()
-            ctx.commit('mutateStudentData',data)
+            if (response.status == 203){
+                router.push('/')
+                alert('Авторизуйтесь')
+            }else if (response.status == 200){
+                ctx.commit('mutateStudentData',data)
+            }  
         }
     },
     mutations: {

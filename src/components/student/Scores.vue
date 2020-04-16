@@ -92,7 +92,6 @@ export default {
     },
     computed: {
         scoresData: function(){
-            console.log(this.gettersScoresData())
             return this.gettersScoresData()
         },
     },

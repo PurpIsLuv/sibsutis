@@ -1,5 +1,7 @@
 const models = require('../associate/associate')
-
+////////////////////////
+////// NO TOKENS  //////
+////////////////////////
 
 async function addCompetence(req,res){
     let competence = await models["Компетенция"].findOne({
@@ -265,12 +267,43 @@ async function addIndistinctClassificationZYV(req,res){
 }
 */
 
+async function addVariable(req,res){
+    let variables = await models["Переменные"].findAll({})
+    let variable = await models["Переменные"].findOne({
+        where: {
+            "формулировка": req.body["формулировка"]
+        },
+    })
+    if (variable){
+        res.send({
+            msg: 'Формулировка для данной переменной существует',
+        })
+    }else{
+        models["Переменные"].create({
+            "переменная": variables.length + 1,
+            "функции_принадлежности": req.body["функции_принадлежности"],
+            "формулировка": req.body["формулировка"]
+        })
+        res.send({
+            msg: 'Формулировка для переменной добавлена'
+        })
+    } 
+}
+
+
+/*
+{
+    "функции_принадлежности": 1,
+    "формулировка": "Уверенность знаний видов и знаний физики и математики при решении практических задач"
+}
+*/
 
 
 module.exports = {
     addCompetence,//не зависит
     addResultTrainingZYV,//не зависит
     addTask,//не зависит
+    addVariable,//не зависит
 
     addDirection,//зависит от компетенции
     addAchievementIndicator,//зависит от компетенции

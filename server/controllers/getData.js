@@ -11,6 +11,7 @@ async function regData(req,res){
     res.send(data)
 }
 
+////////////////Данные которые приходят студенту после авторизации/////////////////////
 async function studentPageData(req,res){
     jwt.verifyToken(req,res)
     if (req.decodedTokenId){
@@ -130,7 +131,34 @@ async function studentPageData(req,res){
     }
 }
 
+async function teacherPageData(req,res){
+    jwt.verifyToken(req,res)
+    if (req.decodedTokenId){
+        let user = await models["Пользователь"].findOne({
+            where: {
+                id: req.decodedTokenId
+            },
+        })
+        if (user.dataValues["тип"] == 'Преподаватель'){
+            let variable = await models["Переменные"].findAll({})
+            res.send({
+                variable
+            })
+        }else if (user.dataValues["тип"] == 'Студент'){
+            res.send({
+                msg: 'Авторизуйтесь как преподаватель'
+            })
+        }
+    }else{
+        res.send({
+            msg: 'Токен просрочен, авторизуйтесь повторно'
+        })
+    }
+}
+
+
 module.exports = {
     regData,
     studentPageData,
+    teacherPageData,
 }
