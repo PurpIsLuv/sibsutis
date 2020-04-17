@@ -1,45 +1,84 @@
 <template>
     <div class="reg">
-        <form @submit.prevent="sendData">
-            <input type="text" placeholder="Имя" v-model="name">
-            <input type="text" placeholder="Фамилия" v-model="surname">
-            <input type="text" placeholder="Отчество" v-model="patronymic">
-            <input type="text" placeholder="Почта" v-model="email">
+        <div class="container-fluid">
+            <div class="row logo justify-content-center">
+                <img src="../assets/img/sibsutis_logo.jpg" alt="">
+            </div>
+            <div class="row justify-content-center">
+                <div class="form reg-form">
+                    <form @submit.prevent="sendData" class="d-flex flex-column align-items-center">
             
+                        <div class="form__item col-8">
+                            <input type="text" placeholder="Имя" v-model="name" class="form-control">
+                        </div>
 
-            <select name="" id="" v-model="type">
-                <option value="Студент">Студент</option>
-                <option value="Преподаватель">Преподаватель</option>
-            </select>
+                        <div class="form__item col-8">
+                            <input type="text" placeholder="Фамилия" v-model="surname" class="form-control">
+                        </div>
 
-            <section class="studentSection" v-if="isStudent">
+                        <div class="form__item col-8">
+                            <input type="text" placeholder="Отчество" v-model="patronymic" class="form-control">
+                        </div>
 
-                <input type="text" placeholder="Номер группы" v-model="номер_группы">
+                        <div class="form__item col-8">
+                            <input type="text" placeholder="Почта" v-model="email" class="form-control">
+                        </div>
 
-                <select name="" id="" v-model="код_направления">
-                    <option :value="i" v-for="i in regData.код_направления" :key="i">
-                        {{i}}
-                    </option>
-                </select>
+                        <div class="form__item col-8">
+                            <select name="" id="" v-model="type" class="form-control">
+                                <option value="Студент">Студент</option>
+                                <option value="Преподаватель">Преподаватель</option>
+                            </select>
+                        </div>  
 
-                <select name="" id="" v-model="направление_подготовки">
-                    <option :value="i" v-for="i in regData.направление_подготовки" :key="i">
-                        {{i}}
-                    </option>
-                </select>
+                        <section class="studentSection col-8" v-if="isStudent">
 
-                <select name="" id="" v-model="профиль_подготовки">
-                    <option :value="i" v-for="i in regData.профиль_подготовки" :key="i">
-                        {{i}}
-                    </option>
-                </select>
-            </section>
+                            <div class="form__item">
+                                <input type="text" placeholder="Номер группы" v-model="номер_группы" class="form-control">
+                            </div>
+                            
+                            <div class="form__item">
+                                <select name="" id="" v-model="код_направления" class="form-control">
+                                    <option :value="i" v-for="i in regData.код_направления" :key="i">
+                                        {{i}}
+                                    </option>
+                                </select>
+                            </div> 
 
+                            <div class="form__item">
+                                <select name="" id="" v-model="направление_подготовки" class="form-control">
+                                    <option :value="i" v-for="i in regData.направление_подготовки" :key="i">
+                                        {{i}}
+                                    </option>
+                                </select>
+                            </div> 
 
-            <input type="text" placeholder="Пароль" v-model="password">
-            <input type="submit" value="Зарегистрироваться">
-        </form>
+                            <div class="form__item">
+                                <select name="" id="" v-model="профиль_подготовки" class="form-control">
+                                    <option :value="i" v-for="i in regData.профиль_подготовки" :key="i">
+                                        {{i}}
+                                    </option>
+                                </select>
+                            </div> 
 
+                        </section>
+
+                        <div class="form__item col-8">
+                            <input type="text" placeholder="Пароль" v-model="password" class="form-control">
+                        </div> 
+
+                        <div class="form__item">
+                            <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                        </div>  
+
+                        <router-link to="/" class="form__item">
+                            <button class="btn btn-primary">Войти</button>
+                        </router-link>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -96,5 +135,7 @@ export default {
 </script>
 
 <style lang="scss">
-    
+    .reg{
+        padding-top: 10vh;
+    }
 </style>

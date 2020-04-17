@@ -7,25 +7,14 @@
                 <li class="col-2">Оценка</li>
             </ul>
             <ul>       
-                <li class="d-flex">
-                    <div class="col-2">1</div>
-                    <div class="col-8">Уверенность знаний видов и знаний физики и математики при решении практических задач </div>
+                <li class="d-flex" v-for="(variable,i) in variables" :key="i">
+                    <div class="col-2">
+                        {{variable["переменная"]}}
+                    </div>
+                    <div class="col-8">
+                        {{variable["формулировка"]}}
+                    </div>
                     <div class="col-2">Высокий</div>
-                </li>
-                <li class="d-flex">
-                    <div class="col-2">2</div>
-                    <div class="col-8">Детализированность знаний видов и параметров сигналов и применения правил преобразования чисел</div>
-                    <div class="col-2">Средний</div>
-                </li>
-                <li class="d-flex">
-                    <div class="col-2">3</div>
-                    <div class="col-8">Практичность применения знаний видов и параметров сигналов</div>
-                    <div class="col-2">Средний</div>
-                </li>
-                <li class="d-flex">
-                    <div class="col-2">4</div>
-                    <div class="col-8">Уместность применения знаний видов и параметров сигналов</div>
-                    <div class="col-2">Низкий</div>
                 </li>
             </ul>     
         </div> 
@@ -33,8 +22,21 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex'
+
 export default {
-    
+    methods: {
+        ...mapActions(['getTeacherData']),
+        ...mapGetters(['getterTeacherData'])
+    },
+    computed: {
+        variables: function(){
+            return this.getterTeacherData()
+        }
+    },
+    created(){
+        this.getTeacherData()
+    },
 }
 </script>
 

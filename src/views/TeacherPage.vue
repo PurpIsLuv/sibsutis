@@ -14,7 +14,7 @@ import Table from '../components/teacher/Table'
 export default {
     components:{
         Table
-    }
+    },
 }
 </script>
 
