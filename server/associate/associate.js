@@ -1,6 +1,6 @@
 /////MODELS//////
 const models = {}
-models["Пользователь"]                      = require('../models/user')
+models["Пользователь"]                         = require('../models/user')
 models["Студент"]                              = require('../models/student')
 models["Направление"]                          = require('../models/napravlenie')
 models["Учебные_дисциплины"]                   = require('../models/uchebnieDiscipliny')

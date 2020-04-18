@@ -75,9 +75,8 @@ export default {
                 }
             }else if (response.status == 203){
                 alert(data.err)
-            }
-            
-        }
+            }  
+        },
     },
     mutations: {
 

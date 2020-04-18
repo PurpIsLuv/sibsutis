@@ -1,6 +1,8 @@
 const models = require('../associate/associate')
 const jwt = require('../services/jwt')
 const bcryptjs = require('bcryptjs')
+const config = require('../config/config')
+
 
 async function reg(req,res){
     let person = await models["Пользователь"].findOne({
@@ -106,8 +108,21 @@ AUTH
 	"пароль": "hash",
 }
 */
+ 
+async function admin(req,res){
+    if (config.adminPassword == req.body.password){
+        res.send({
+            msg: 'Верный пароль'
+        })
+    }else{
+        res.send({
+            msg: 'Не верный пароль'
+        })
+    }
+}
 
 module.exports = {
     reg,
     login,
+    admin,
 }

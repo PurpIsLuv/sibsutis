@@ -1,6 +1,6 @@
 <template>
     <div class="reg">
-        <div class="container-fluid">
+        <div class="container-fluid field">
             <div class="row logo justify-content-center">
                 <img src="../assets/img/sibsutis_logo.jpg" alt="">
             </div>
@@ -135,7 +135,5 @@ export default {
 </script>
 
 <style lang="scss">
-    .reg{
-        padding-top: 10vh;
-    }
+
 </style>

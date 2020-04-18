@@ -1,5 +1,5 @@
 <template>
-    <div class="StudentPage">
+    <div class="UserPage">
         <div class="container-fluid">
 
             <section class="row topbar">
@@ -34,89 +34,89 @@
             </section>
 
             <section class="row justify-content-center" v-if="isActive.tasks">
-                <div class="table col-10">
-                    <ul class="attributes row">
-                        <li class="attributes__item col-8">Задание</li>
-                        <li class="attributes__item col-2">Тип</li>
-                        <li class="attributes__item col-2">Оценка</li>
-                    </ul>
-                    <ul class="lines">
-                        <li class="d-flex line" v-for="(task,i) in tasks" :key="i">
-                            <div class="line__item col-8">
+                <table class="table col-10">
+                    <tr class="attributes row">
+                        <td class="attributes__item col-8">Задание</td>
+                        <td class="attributes__item col-2">Тип</td>
+                        <td class="attributes__item col-2">Оценка</td>
+                    </tr>
+                    <div class="lines">
+                        <tr class="d-flex line" v-for="(task,i) in tasks" :key="i">
+                            <td class="line__item col-8">
                                 {{task["текст_задания"]}}
-                            </div>
-                            <div class="line__item col-2">
+                            </td>
+                            <td class="line__item col-2">
                                 {{task["тип_задания"]}}
-                            </div>
-                            <div class="line__item col-2">8</div>
-                        </li>
-                    </ul> 
-                </div> 
+                            </td>
+                            <td class="line__item col-2">8</td>
+                        </tr>
+                    </div> 
+                </table> 
             </section>
 
             <section class="row justify-content-center" v-if="isActive.zyv">
-                <div class="table col-10">
-                    <ul class="attributes row">
-                        <li class="attributes__item col-2">ЗУВ</li>
-                        <li class="attributes__item col-6">Формулировка</li>
-                        <li class="attributes__item col-2">Оценка D</li>
-                        <li class="attributes__item col-2">Оценка F</li>
-                    </ul>
-                    <ul class="lines">       
-                        <li class="d-flex line" v-for="(resultTrainingZYV,i) in scoresData.resultTrainingZYV" :key="i">
-                            <div class="line__item col-2">
+                <table class="table col-10">
+                    <tr class="attributes row">
+                        <td class="attributes__item col-2">ЗУВ</td>
+                        <td class="attributes__item col-6">Формулировка</td>
+                        <td class="attributes__item col-2">Оценка D</td>
+                        <td class="attributes__item col-2">Оценка F</td>
+                    </tr>
+                    <div class="lines">       
+                        <tr class="d-flex line" v-for="(resultTrainingZYV,i) in scoresData.resultTrainingZYV" :key="i">
+                            <td class="line__item col-2">
                                 {{resultTrainingZYV["код_зув"]}}
-                            </div>
-                            <div class="line__item col-6">
+                            </td>
+                            <td class="line__item col-6">
                                 {{resultTrainingZYV["формулировка_зув"]}}
-                            </div>
-                            <div class="line__item col-2">5,00</div>
-                            <div class="line__item col-2">Высокий</div>
-                        </li>
-                    </ul>     
-                </div> 
+                            </td>
+                            <td class="line__item col-2">5,00</td>
+                            <td class="line__item col-2">Высокий</td>
+                        </tr>
+                    </div>     
+                </table> 
             </section>
 
             <section class="row justify-content-center" v-if="isActive.indicator">
-                <div class="table col-10">
-                    <ul class="attributes row">
-                        <li class="attributes__item col-2">Код индикатора</li>
-                        <li class="attributes__item col-8">Формулировка</li>
-                        <li class="attributes__item col-2">Оценка</li>
-                    </ul>
-                    <ul class="lines">       
-                        <li class="d-flex line" v-for="(indicatorAchievement,i) in scoresData.indicatorAchievement" :key="i">
-                            <div class="line__item col-2">
+                <table class="table col-10">
+                    <tr class="attributes row">
+                        <td class="attributes__item col-2">Код индикатора</td>
+                        <td class="attributes__item col-8">Формулировка</td>
+                        <td class="attributes__item col-2">Оценка</td>
+                    </tr>
+                    <div class="lines">       
+                        <tr class="d-flex line" v-for="(indicatorAchievement,i) in scoresData.indicatorAchievement" :key="i">
+                            <td class="line__item col-2">
                                 {{indicatorAchievement["код_индикатора"]}}
-                            </div>
-                            <div class="line__item col-8">
+                            </td>
+                            <td class="line__item col-8">
                                 {{indicatorAchievement["формулировка_индикатора"]}}
-                            </div>
-                            <div class="line__item col-2">10</div>
-                        </li>
-                    </ul>     
-                </div> 
+                            </td>
+                            <td class="line__item col-2">10</td>
+                        </tr>
+                    </div>     
+                </table> 
             </section>
 
             <section class="row justify-content-center" v-if="isActive.competence">
-                <div class="table col-10">
-                    <ul class="attributes row">
-                        <li class="attributes__item col-2">Код компетенций</li>
-                        <li class="attributes__item col-8">Формулировка</li>
-                        <li class="attributes__item col-2">Оценка</li>
-                    </ul>
-                    <ul class="lines">       
-                        <li class="d-flex line" v-for="(indicatorAchievement,i) in scoresData.indicatorAchievement" :key="i">
-                            <div class="line__item col-2">
+                <table class="table col-10">
+                    <tr class="attributes row">
+                        <td class="attributes__item col-2">Код компетенций</td>
+                        <td class="attributes__item col-8">Формулировка</td>
+                        <td class="attributes__item col-2">Оценка</td>
+                    </tr>
+                    <div class="lines">       
+                        <tr class="d-flex line" v-for="(indicatorAchievement,i) in scoresData.indicatorAchievement" :key="i">
+                            <td class="line__item col-2">
                                 {{scoresData.competence["код_компетенции"]}}
-                            </div>
-                            <div class="line__item col-8">
+                            </td>
+                            <td class="line__item col-8">
                                 {{scoresData.competence["формулировка_компетенции"]}}
-                            </div>
-                            <div class="line__item col-2">8</div>
-                        </li>
-                    </ul>     
-                </div> 
+                            </td>
+                            <td class="line__item col-2">8</td>
+                        </tr>
+                    </div>     
+                </table> 
             </section>
 
             
@@ -202,23 +202,26 @@ export default {
             this["профиль_подготовки"] = sessionStorage["профиль_подготовки"]
         }
     },
+
     /*
-    <section class="row justify-content-center">
+    <section class="row justify-content-center" v-if="isActive.tasks">
                 <div class="table col-10">
                     <ul class="attributes row">
-                        <li class="attributes__item col-2">Код компетенций</li>
-                        <li class="attributes__item col-5">Формулировка</li>
-                        <li class="attributes__item col-2">Код направления</li>
-                        <li class="attributes__item col-3">Тип компетенции</li>
+                        <li class="attributes__item col-8">Задание</li>
+                        <li class="attributes__item col-2">Тип</li>
+                        <li class="attributes__item col-2">Оценка</li>
                     </ul>
-                    <ul class="lines">       
-                        <li class="d-flex">
-                            <div class="col-2">ОПК-3</div>
-                            <div class="col-5">Способен применять методы поиска, хранения, обработки, анализа и представления в </div>
-                            <div class="col-2">11.03.02</div>
-                            <div class="col-3">Общепрофессиональные</div>
+                    <ul class="lines">
+                        <li class="d-flex line" v-for="(task,i) in tasks" :key="i">
+                            <div class="line__item col-8">
+                                {{task["текст_задания"]}}
+                            </div>
+                            <div class="line__item col-2">
+                                {{task["тип_задания"]}}
+                            </div>
+                            <div class="line__item col-2">8</div>
                         </li>
-                    </ul>     
+                    </ul> 
                 </div> 
             </section>
     */
@@ -226,7 +229,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .StudentPage{
+    .UserPage{
         .topbar{
             background-color: #01448b;
             color: #fff;
@@ -268,7 +271,7 @@ export default {
                 border-radius: 3px;
             }
             .attributes{
-                font-size: 30px;
+                font-size: 25px;
                 color: #01448b;
                 margin-right: 12px;
                 margin-left: 0px;
@@ -283,7 +286,6 @@ export default {
                 height: 50vh;
                 overflow-y: scroll;
                 .line{
-                    background-color: #01448b;
                     border-radius: 5px;
                     margin-top: 10px;
                     padding-top: 10px;
@@ -293,6 +295,7 @@ export default {
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        background-color: #01448b;
                     }
                 }
             }

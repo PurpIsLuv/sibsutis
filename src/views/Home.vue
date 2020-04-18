@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <div class="container-fluid">
+  <div class="reg">
+    <div class="container-fluid field">
       <div class="row logo justify-content-center">
         <img src="../assets/img/sibsutis_logo.jpg" alt="">
       </div>
@@ -63,8 +63,17 @@ export default {
 </script>
 
 <style lang="scss">
-.home{
-  padding-top: 10vh;
+.reg{
+  
+  background-image: url('../assets/img/7cac60c6eb2c.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  .field{
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    height: 100vh;
+    padding-top: 10vh;
+  }
 }
   .logo{
     img{
@@ -77,12 +86,12 @@ export default {
     }
   }
   .form{
-    background-color: #01448b;
+    background-color: rgba($color: #01448b, $alpha: 0.7);
     border-radius: 10px;
     margin-top: 40px;
     width: 350px;
     padding-top: 40px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     .form__item{
       margin-top: 10px;
       button{
