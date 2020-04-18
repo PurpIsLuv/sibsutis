@@ -9,8 +9,11 @@ const controllers = require('./controllers/controllers')
 
 app.use(cors())
 app.use(express.json())
-app.use(express.static(path.join(__dirname,'../dist')))
-
+app.use("/",express.static(path.join(__dirname,'../dist')))
+app.use("/registration",express.static(path.join(__dirname,'../dist')))
+app.use("/studentPageData",express.static(path.join(__dirname,'../dist')))
+app.use("/teacherPageData",express.static(path.join(__dirname,'../dist')))
+app.use("/admin",express.static(path.join(__dirname,'../dist')))
 //for User
 app.post("/registration",controllers.auth.reg)
 app.post("/login",controllers.auth.login)
